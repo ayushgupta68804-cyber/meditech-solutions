@@ -77,22 +77,22 @@ const Footer = () => {
             <h4 className="font-heading font-semibold text-foreground">Contact Us</h4>
             <div className="flex flex-col gap-3">
               <a
-                href="mailto:support@mediteck.com"
+                href="mailto:ayushgupta69904@gmail.com"
                 className="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary"
               >
                 <Mail className="h-4 w-4" />
-                support@mediteck.com
+                ayushgupta69904@gmail.com
               </a>
               <a
-                href="tel:+1234567890"
+                href="tel:+919022053701"
                 className="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary"
               >
                 <Phone className="h-4 w-4" />
-                +1 (234) 567-890
+                +91 90220 53701
               </a>
               <span className="flex items-center gap-2 text-sm text-muted-foreground">
                 <MapPin className="h-4 w-4" />
-                123 Medical Plaza, Health City
+                123 Medical Plaza, Bramhanand Nagar, Kamatghar, Bhiwandi, Thane 421305
               </span>
             </div>
           </div>
