@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { useAlerts } from '@/hooks/useAlerts';
+import MediBot from '@/components/MediBot';
 import {
   Pill,
   LayoutDashboard,
@@ -184,6 +185,9 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
           {children}
         </main>
       </div>
+
+      {/* MediBot AI Assistant */}
+      <MediBot />
     </div>
   );
 };
