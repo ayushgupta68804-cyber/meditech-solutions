@@ -27,10 +27,16 @@ export interface Sale {
   user_name?: string;
 }
 
+export interface CreateSaleItemInput {
+  medicine_id: string;
+  quantity: number;
+  unit_price: number;
+}
+
 export interface CreateSaleInput {
-  customer_name?: string;
-  customer_contact?: string;
-  items: SaleItem[];
+  customer_name?: string | null;
+  customer_contact?: string | null;
+  items: CreateSaleItemInput[];
 }
 
 export const useSales = (startDate?: string, endDate?: string) => {
@@ -161,12 +167,20 @@ export const useCreateSale = () => {
 
           // Create alert if low stock
           if (newQuantity <= 5) {
+            // Get medicine name for alert
+            const { data: med } = await supabase
+              .from('medicines')
+              .select('name')
+              .eq('id', item.medicine_id)
+              .single();
+            const medicineName = med?.name || 'Unknown medicine';
+            
             await supabase.from('alerts').insert({
               medicine_id: item.medicine_id,
               type: newQuantity === 0 ? 'OUT_OF_STOCK' : 'LOW_STOCK',
               message: newQuantity === 0 
-                ? `${item.medicine_name} is out of stock!`
-                : `${item.medicine_name} is running low (${newQuantity} left)`,
+                ? `${medicineName} is out of stock!`
+                : `${medicineName} is running low (${newQuantity} left)`,
             });
           }
         }
