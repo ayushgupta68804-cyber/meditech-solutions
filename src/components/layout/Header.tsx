@@ -49,13 +49,13 @@ const Header = () => {
         {/* Auth Buttons */}
         <div className="hidden items-center gap-3 md:flex">
           <Button variant="outline" asChild className="gap-2">
-            <Link to="/login/user">
+            <Link to="/login">
               <Users className="h-4 w-4" />
               Staff Login
             </Link>
           </Button>
           <Button asChild className="gap-2 bg-gradient-primary btn-glow">
-            <Link to="/login/admin">
+            <Link to="/admin-login">
               <Shield className="h-4 w-4" />
               Admin Login
             </Link>
@@ -105,13 +105,13 @@ const Header = () => {
             </Link>
             <div className="flex flex-col gap-2 pt-4">
               <Button variant="outline" asChild className="w-full gap-2">
-                <Link to="/login/user">
+                <Link to="/login">
                   <Users className="h-4 w-4" />
                   Staff Login
                 </Link>
               </Button>
               <Button asChild className="w-full gap-2 bg-gradient-primary">
-                <Link to="/login/admin">
+                <Link to="/admin-login">
                   <Shield className="h-4 w-4" />
                   Admin Login
                 </Link>
