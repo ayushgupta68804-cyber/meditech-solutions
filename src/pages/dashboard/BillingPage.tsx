@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import DashboardLayout from '@/components/dashboard/DashboardLayout';
 import { useMedicines } from '@/hooks/useMedicines';
 import { useCreateSale } from '@/hooks/useSales';
@@ -8,9 +8,10 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
-import { Plus, Minus, Trash2, Search, ShoppingCart, Receipt, Camera, X } from 'lucide-react';
+import { Plus, Minus, Trash2, Search, ShoppingCart, Receipt, Camera, ScanLine } from 'lucide-react';
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import BarcodeScanner from '@/components/BarcodeScanner';
 
 interface CartItem {
   medicine_id: string;
@@ -31,6 +32,7 @@ const BillingPage = () => {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const [barcodeInput, setBarcodeInput] = useState('');
+  const [showScanner, setShowScanner] = useState(false);
   const barcodeInputRef = useRef<HTMLInputElement>(null);
 
   const addToCart = (medicine: any) => {
@@ -80,11 +82,15 @@ const BillingPage = () => {
   const handleBarcodeSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!barcodeInput.trim()) return;
+    handleBarcodeScanned(barcodeInput.trim());
+  };
 
-    const medicine = medicines?.find((m) => m.barcode === barcodeInput.trim());
+  const handleBarcodeScanned = (barcode: string) => {
+    const medicine = medicines?.find((m) => m.barcode === barcode);
     if (medicine) {
       addToCart(medicine);
       setBarcodeInput('');
+      toast({ title: 'Medicine added', description: medicine.name });
     } else {
       toast({ title: 'Medicine not found', description: 'No medicine with this barcode', variant: 'destructive' });
     }
@@ -124,6 +130,12 @@ const BillingPage = () => {
 
   return (
     <DashboardLayout>
+      {showScanner && (
+        <BarcodeScanner
+          onScan={handleBarcodeScanned}
+          onClose={() => setShowScanner(false)}
+        />
+      )}
       <div className="space-y-6">
         <h1 className="font-heading text-2xl font-bold">Billing</h1>
 
@@ -134,7 +146,7 @@ const BillingPage = () => {
             <Card>
               <CardHeader className="pb-3">
                 <CardTitle className="flex items-center gap-2 text-lg">
-                  <Camera className="h-5 w-5" />
+                  <ScanLine className="h-5 w-5" />
                   Barcode Scanner
                 </CardTitle>
               </CardHeader>
@@ -142,12 +154,16 @@ const BillingPage = () => {
                 <form onSubmit={handleBarcodeSubmit} className="flex gap-2">
                   <Input
                     ref={barcodeInputRef}
-                    placeholder="Scan or enter barcode..."
+                    placeholder="Enter barcode..."
                     value={barcodeInput}
                     onChange={(e) => setBarcodeInput(e.target.value)}
                     className="flex-1"
                   />
-                  <Button type="submit">Add</Button>
+                  <Button type="submit" variant="secondary">Add</Button>
+                  <Button type="button" onClick={() => setShowScanner(true)} className="gap-2">
+                    <Camera className="h-4 w-4" />
+                    Scan
+                  </Button>
                 </form>
               </CardContent>
             </Card>
