@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Mail, Phone, MapPin, Clock, Send } from "lucide-react";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -37,18 +38,33 @@ const Contact = () => {
 
     setIsSubmitting(true);
     
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    
-    toast.success("Thank you for contacting us! We'll get back to you soon.");
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      subject: "",
-      message: "",
-    });
-    setIsSubmitting(false);
+    try {
+      const { data, error } = await supabase.functions.invoke("send-contact-email", {
+        body: {
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          phone: formData.phone.trim() || undefined,
+          subject: formData.subject.trim() || undefined,
+          message: formData.message.trim(),
+        },
+      });
+
+      if (error) throw error;
+
+      toast.success("Thank you for contacting us! We'll get back to you soon.");
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        subject: "",
+        message: "",
+      });
+    } catch (error: any) {
+      console.error("Error sending message:", error);
+      toast.error("Failed to send message. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
