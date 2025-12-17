@@ -8,6 +8,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Download, Package, AlertTriangle, Calendar, TrendingUp } from 'lucide-react';
 import { format, subDays } from 'date-fns';
+import SalesTrendChart from '@/components/dashboard/SalesTrendChart';
+import InventoryAnalyticsChart from '@/components/dashboard/InventoryAnalyticsChart';
 
 const ReportsPage = () => {
   const { data: medicines } = useMedicines();
@@ -39,6 +41,14 @@ const ReportsPage = () => {
     <DashboardLayout>
       <div className="space-y-6">
         <h1 className="font-heading text-2xl font-bold">Reports</h1>
+
+        {/* Analytics Charts */}
+        <div className="grid gap-4 lg:grid-cols-2">
+          <SalesTrendChart sales={sales} days={30} />
+          <div className="lg:col-span-1">
+            <InventoryAnalyticsChart medicines={medicines} lowStock={lowStock} expiring={expiring} />
+          </div>
+        </div>
 
         <Tabs defaultValue="low-stock" className="space-y-4">
           <TabsList className="grid w-full grid-cols-2 lg:grid-cols-4">

@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { BarChart3, DollarSign, ShoppingBag, Calendar } from 'lucide-react';
 import { format, startOfMonth, endOfMonth, startOfWeek, endOfWeek, isWithinInterval } from 'date-fns';
+import SalesTrendChart from '@/components/dashboard/SalesTrendChart';
 
 const SalesPage = () => {
   const { data: sales, isLoading } = useSales();
@@ -68,6 +69,9 @@ const SalesPage = () => {
             </Card>
           ))}
         </div>
+
+        {/* Sales Trend Chart */}
+        <SalesTrendChart sales={sales} days={14} />
 
         {/* Date Filter */}
         <Card>
