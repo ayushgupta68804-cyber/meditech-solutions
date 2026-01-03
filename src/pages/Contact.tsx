@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Mail, Phone, MapPin, Clock, Send } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -51,7 +50,7 @@ const Contact = () => {
 
       if (error) throw error;
 
-      toast.success("Thank you for contacting us! We'll get back to you soon.");
+      toast.success("Message sent successfully!");
       setFormData({
         name: "",
         email: "",
@@ -61,7 +60,7 @@ const Contact = () => {
       });
     } catch (error: any) {
       console.error("Error sending message:", error);
-      toast.error("Failed to send message. Please try again later.");
+      toast.error("Failed to send message. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -72,114 +71,75 @@ const Contact = () => {
       <Header />
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="bg-gradient-hero py-20">
+        <section className="bg-secondary py-12">
           <div className="container">
-            <div className="mx-auto max-w-3xl text-center">
-              <span className="inline-block rounded-full bg-secondary px-4 py-1.5 text-sm font-medium text-secondary-foreground">
+            <div className="text-center max-w-3xl mx-auto">
+              <h1 className="text-3xl font-bold text-foreground mb-4">
                 Contact Us
-              </span>
-              <h1 className="mt-4 font-heading text-4xl font-bold text-foreground md:text-5xl">
-                Get in Touch
               </h1>
-              <p className="mt-6 text-lg text-muted-foreground">
-                Have questions about MediTeck? We're here to help. Reach out to
-                us and we'll respond as soon as possible.
+              <p className="text-muted-foreground">
+                Have questions? We're here to help. Reach out to us.
               </p>
             </div>
           </div>
         </section>
 
         {/* Contact Section */}
-        <section className="py-20">
+        <section className="py-12">
           <div className="container">
-            <div className="grid gap-12 lg:grid-cols-2">
+            <div className="grid gap-8 lg:grid-cols-2">
               {/* Contact Info */}
-              <div className="space-y-8">
-                <div>
-                  <h2 className="font-heading text-2xl font-bold text-foreground">
-                    Contact Information
-                  </h2>
-                  <p className="mt-2 text-muted-foreground">
-                    Reach out to us through any of the following channels.
-                  </p>
-                </div>
+              <div>
+                <h2 className="text-xl font-bold text-foreground mb-4">
+                  Contact Information
+                </h2>
 
-                <div className="space-y-6">
-                  <a
-                    href="mailto:ayushgupta69904@gmail.com"
-                    className="flex items-start gap-4 rounded-lg border border-border bg-card p-4 transition-colors hover:border-primary"
-                  >
-                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-secondary">
-                      <Mail className="h-6 w-6 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-foreground">Email</h3>
-                      <p className="text-muted-foreground">
-                        ayushgupta69904@gmail.com
-                      </p>
-                    </div>
-                  </a>
-
-                  <a
-                    href="tel:+919022053701"
-                    className="flex items-start gap-4 rounded-lg border border-border bg-card p-4 transition-colors hover:border-primary"
-                  >
-                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-secondary">
-                      <Phone className="h-6 w-6 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-foreground">Phone</h3>
-                      <p className="text-muted-foreground">+91 90220 53701</p>
-                    </div>
-                  </a>
-
-                  <div className="flex items-start gap-4 rounded-lg border border-border bg-card p-4">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-secondary">
-                      <MapPin className="h-6 w-6 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-foreground">Address</h3>
-                      <p className="text-muted-foreground">
-                        123 Medical Plaza, Bramhanand Nagar,
-                        <br />
-                        Kamatghar, Bhiwandi, Thane 421305
-                      </p>
-                    </div>
+                <div className="space-y-3">
+                  <div className="border border-border rounded p-4 bg-card">
+                    <h3 className="font-bold text-foreground mb-1">Email</h3>
+                    <a href="mailto:ayushgupta69904@gmail.com" className="text-primary hover:underline">
+                      ayushgupta69904@gmail.com
+                    </a>
                   </div>
 
-                  <div className="flex items-start gap-4 rounded-lg border border-border bg-card p-4">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-secondary">
-                      <Clock className="h-6 w-6 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-foreground">
-                        Business Hours
-                      </h3>
-                      <p className="text-muted-foreground">
-                        Mon - Sat: 9:00 AM - 8:00 PM
-                        <br />
-                        Sunday: Closed
-                      </p>
-                    </div>
+                  <div className="border border-border rounded p-4 bg-card">
+                    <h3 className="font-bold text-foreground mb-1">Phone</h3>
+                    <a href="tel:+919022053701" className="text-primary hover:underline">
+                      +91 90220 53701
+                    </a>
+                  </div>
+
+                  <div className="border border-border rounded p-4 bg-card">
+                    <h3 className="font-bold text-foreground mb-1">Address</h3>
+                    <p className="text-muted-foreground">
+                      123 Medical Plaza, Bramhanand Nagar,<br />
+                      Kamatghar, Bhiwandi, Thane 421305
+                    </p>
+                  </div>
+
+                  <div className="border border-border rounded p-4 bg-card">
+                    <h3 className="font-bold text-foreground mb-1">Business Hours</h3>
+                    <p className="text-muted-foreground">
+                      Mon - Sat: 9:00 AM - 8:00 PM<br />
+                      Sunday: Closed
+                    </p>
                   </div>
                 </div>
               </div>
 
               {/* Contact Form */}
-              <div className="card-medical">
-                <h2 className="font-heading text-2xl font-bold text-foreground">
-                  Send us a Message
+              <div className="border border-border rounded p-6 bg-card">
+                <h2 className="text-xl font-bold text-foreground mb-2">
+                  Send a Message
                 </h2>
-                <p className="mt-2 text-muted-foreground">
-                  Fill out the form below and we'll get back to you shortly.
+                <p className="text-sm text-muted-foreground mb-4">
+                  Fill out the form and we'll get back to you.
                 </p>
 
-                <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid gap-4 sm:grid-cols-2">
-                    <div className="space-y-2">
-                      <Label htmlFor="name">
-                        Name <span className="text-destructive">*</span>
-                      </Label>
+                    <div>
+                      <Label htmlFor="name">Name *</Label>
                       <Input
                         id="name"
                         name="name"
@@ -189,10 +149,8 @@ const Contact = () => {
                         required
                       />
                     </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="email">
-                        Email <span className="text-destructive">*</span>
-                      </Label>
+                    <div>
+                      <Label htmlFor="email">Email *</Label>
                       <Input
                         id="email"
                         name="email"
@@ -206,7 +164,7 @@ const Contact = () => {
                   </div>
 
                   <div className="grid gap-4 sm:grid-cols-2">
-                    <div className="space-y-2">
+                    <div>
                       <Label htmlFor="phone">Phone</Label>
                       <Input
                         id="phone"
@@ -216,26 +174,24 @@ const Contact = () => {
                         onChange={handleChange}
                       />
                     </div>
-                    <div className="space-y-2">
+                    <div>
                       <Label htmlFor="subject">Subject</Label>
                       <Input
                         id="subject"
                         name="subject"
-                        placeholder="How can we help?"
+                        placeholder="Subject"
                         value={formData.subject}
                         onChange={handleChange}
                       />
                     </div>
                   </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="message">
-                      Message <span className="text-destructive">*</span>
-                    </Label>
+                  <div>
+                    <Label htmlFor="message">Message *</Label>
                     <Textarea
                       id="message"
                       name="message"
-                      placeholder="Tell us more about your inquiry..."
+                      placeholder="Your message..."
                       rows={5}
                       value={formData.message}
                       onChange={handleChange}
@@ -243,19 +199,8 @@ const Contact = () => {
                     />
                   </div>
 
-                  <Button
-                    type="submit"
-                    className="w-full gap-2 bg-gradient-primary"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? (
-                      "Sending..."
-                    ) : (
-                      <>
-                        <Send className="h-4 w-4" />
-                        Send Message
-                      </>
-                    )}
+                  <Button type="submit" className="w-full" disabled={isSubmitting}>
+                    {isSubmitting ? "Sending..." : "Send Message"}
                   </Button>
                 </form>
               </div>

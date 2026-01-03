@@ -1,26 +1,10 @@
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import {
-  Pill,
-  Scan,
-  FileText,
-  Bell,
-  BarChart3,
-  Shield,
-  Users,
-  Clock,
-  Bot,
-  Package,
-  Receipt,
-  TrendingUp,
-} from "lucide-react";
 
 const features = [
   {
-    icon: Pill,
     title: "Medicine Inventory",
-    description:
-      "Track all medicines with batch numbers, expiry dates, and stock levels in real-time. Comprehensive database with search and filter capabilities.",
+    description: "Track all medicines with batch numbers, expiry dates, and stock levels.",
     details: [
       "Add medicines with complete details",
       "Track batch numbers and manufacturing dates",
@@ -29,10 +13,8 @@ const features = [
     ],
   },
   {
-    icon: Scan,
     title: "Barcode Scanning",
-    description:
-      "Quick medicine lookup using barcode/QR scanning for faster billing and inventory management.",
+    description: "Quick medicine lookup using barcode/QR scanning for faster billing.",
     details: [
       "Camera-based barcode scanning",
       "Instant medicine lookup",
@@ -41,10 +23,8 @@ const features = [
     ],
   },
   {
-    icon: FileText,
     title: "Billing System",
-    description:
-      "Generate professional invoices with automatic stock reduction and comprehensive sales logging.",
+    description: "Generate professional invoices with automatic stock reduction.",
     details: [
       "Multi-item billing support",
       "Automatic stock reduction",
@@ -53,10 +33,8 @@ const features = [
     ],
   },
   {
-    icon: Bell,
     title: "Smart Alerts",
-    description:
-      "Get notified for low stock and expiring medicines before it's too late. Never miss critical inventory issues.",
+    description: "Get notified for low stock and expiring medicines.",
     details: [
       "Low stock alerts (below 5 units)",
       "Expiry alerts (30/15/7 days)",
@@ -65,10 +43,8 @@ const features = [
     ],
   },
   {
-    icon: BarChart3,
     title: "Sales Analytics",
-    description:
-      "Comprehensive dashboards with charts for daily, weekly, and monthly sales reports and insights.",
+    description: "Comprehensive dashboards with charts for sales reports.",
     details: [
       "Real-time sales tracking",
       "Revenue analytics",
@@ -77,10 +53,8 @@ const features = [
     ],
   },
   {
-    icon: Shield,
     title: "Secure Access",
-    description:
-      "Role-based authentication with separate admin and staff access controls for maximum security.",
+    description: "Role-based authentication with admin and staff access controls.",
     details: [
       "Admin and staff roles",
       "Secure password hashing",
@@ -89,10 +63,8 @@ const features = [
     ],
   },
   {
-    icon: Bot,
     title: "AI Medicine Assistant",
-    description:
-      "Get instant information about any medicine worldwide with our AI-powered MediBot assistant.",
+    description: "Get instant information about any medicine with AI assistant.",
     details: [
       "Global medicine information",
       "Dosage and usage guidance",
@@ -101,10 +73,8 @@ const features = [
     ],
   },
   {
-    icon: Clock,
     title: "Audit Logs",
-    description:
-      "Complete history of all actions with timestamps and user identification for compliance and security.",
+    description: "Complete history of all actions with timestamps.",
     details: [
       "Track all user actions",
       "Timestamp recording",
@@ -113,10 +83,8 @@ const features = [
     ],
   },
   {
-    icon: Package,
     title: "Inventory Management",
-    description:
-      "Complete control over your medicine stock with easy updates and tracking of all inventory changes.",
+    description: "Complete control over medicine stock with easy updates.",
     details: [
       "Stock level monitoring",
       "Inventory change logs",
@@ -125,10 +93,8 @@ const features = [
     ],
   },
   {
-    icon: Receipt,
     title: "Sales Records",
-    description:
-      "Maintain comprehensive sales records with customer details and transaction history.",
+    description: "Maintain comprehensive sales records with customer details.",
     details: [
       "Complete transaction history",
       "Customer contact storage",
@@ -137,10 +103,8 @@ const features = [
     ],
   },
   {
-    icon: Users,
     title: "Multi-User Support",
-    description:
-      "Multiple staff members can work simultaneously with complete audit trail tracking.",
+    description: "Multiple staff members can work simultaneously.",
     details: [
       "Concurrent user access",
       "Individual user tracking",
@@ -149,10 +113,8 @@ const features = [
     ],
   },
   {
-    icon: TrendingUp,
     title: "Business Reports",
-    description:
-      "Generate detailed business reports for sales, inventory, and operations management.",
+    description: "Generate detailed business reports for operations management.",
     details: [
       "Daily/weekly/monthly reports",
       "Exportable to CSV",
@@ -168,50 +130,46 @@ const Features = () => {
       <Header />
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="bg-gradient-hero py-20">
+        <section className="bg-secondary py-12">
           <div className="container">
-            <div className="mx-auto max-w-3xl text-center">
-              <span className="inline-block rounded-full bg-secondary px-4 py-1.5 text-sm font-medium text-secondary-foreground">
-                Features
-              </span>
-              <h1 className="mt-4 font-heading text-4xl font-bold text-foreground md:text-5xl">
-                Powerful Features for Modern Pharmacy Management
+            <div className="text-center max-w-3xl mx-auto">
+              <h1 className="text-3xl font-bold text-foreground mb-4">
+                System Features
               </h1>
-              <p className="mt-6 text-lg text-muted-foreground">
-                Everything you need to run your medical store efficiently. From
-                inventory management to AI-powered assistance, we've got you
-                covered.
+              <p className="text-muted-foreground">
+                Complete features for efficient pharmacy management - from inventory to billing.
               </p>
             </div>
           </div>
         </section>
 
         {/* Features Grid */}
-        <section className="py-20">
+        <section className="py-12">
           <div className="container">
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               {features.map((feature, index) => (
                 <div
                   key={feature.title}
-                  className="card-medical hover-lift"
-                  style={{ animationDelay: `${index * 50}ms` }}
+                  className="border border-border rounded p-4 bg-card hover:border-primary"
                 >
-                  <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-primary">
-                    <feature.icon className="h-7 w-7 text-primary-foreground" />
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="w-8 h-8 bg-primary text-primary-foreground rounded flex items-center justify-center text-sm font-bold">
+                      {index + 1}
+                    </span>
+                    <h3 className="font-bold text-foreground">
+                      {feature.title}
+                    </h3>
                   </div>
-                  <h3 className="font-heading text-xl font-semibold text-foreground">
-                    {feature.title}
-                  </h3>
-                  <p className="mt-2 text-muted-foreground">
+                  <p className="text-sm text-muted-foreground mb-3">
                     {feature.description}
                   </p>
-                  <ul className="mt-4 space-y-2">
+                  <ul className="space-y-1">
                     {feature.details.map((detail) => (
                       <li
                         key={detail}
-                        className="flex items-center gap-2 text-sm text-muted-foreground"
+                        className="flex items-center gap-2 text-xs text-muted-foreground"
                       >
-                        <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+                        <span className="text-primary">•</span>
                         {detail}
                       </li>
                     ))}
