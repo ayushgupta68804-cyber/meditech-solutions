@@ -1,9 +1,10 @@
 import { useMemo } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid } from 'recharts';
 import { TrendingUp } from 'lucide-react';
 import { format, subDays, eachDayOfInterval } from 'date-fns';
+import { DateRange } from 'react-day-picker';
 
 interface Sale {
   created_at: string;
@@ -13,6 +14,7 @@ interface Sale {
 interface SalesTrendChartProps {
   sales: Sale[] | undefined;
   days?: number;
+  dateRange?: DateRange;
 }
 
 const chartConfig = {
@@ -22,14 +24,14 @@ const chartConfig = {
   },
 };
 
-const SalesTrendChart = ({ sales, days = 14 }: SalesTrendChartProps) => {
+const SalesTrendChart = ({ sales, days = 14, dateRange }: SalesTrendChartProps) => {
   const chartData = useMemo(() => {
-    const endDate = new Date();
-    const startDate = subDays(endDate, days - 1);
+    const endDate = dateRange?.to || new Date();
+    const startDate = dateRange?.from || subDays(endDate, days - 1);
     
-    const dateRange = eachDayOfInterval({ start: startDate, end: endDate });
+    const dateRangeInterval = eachDayOfInterval({ start: startDate, end: endDate });
     
-    return dateRange.map((date) => {
+    return dateRangeInterval.map((date) => {
       const dateStr = format(date, 'yyyy-MM-dd');
       const daySales = sales?.filter((s) => 
         format(new Date(s.created_at), 'yyyy-MM-dd') === dateStr
@@ -43,7 +45,7 @@ const SalesTrendChart = ({ sales, days = 14 }: SalesTrendChartProps) => {
         count: daySales.length,
       };
     });
-  }, [sales, days]);
+  }, [sales, days, dateRange]);
 
   const totalSales = chartData.reduce((sum, d) => sum + d.sales, 0);
   const totalTransactions = chartData.reduce((sum, d) => sum + d.count, 0);
