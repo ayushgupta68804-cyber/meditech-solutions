@@ -1,6 +1,5 @@
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import { Target, Eye, Heart, Award, Users, Zap } from "lucide-react";
 
 const About = () => {
   return (
@@ -8,119 +7,93 @@ const About = () => {
       <Header />
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="bg-gradient-hero py-20">
+        <section className="bg-secondary py-12">
           <div className="container">
-            <div className="mx-auto max-w-3xl text-center">
-              <span className="inline-block rounded-full bg-secondary px-4 py-1.5 text-sm font-medium text-secondary-foreground">
-                About Us
-              </span>
-              <h1 className="mt-4 font-heading text-4xl font-bold text-foreground md:text-5xl">
-                Transforming Pharmacy Management
+            <div className="text-center max-w-3xl mx-auto">
+              <h1 className="text-3xl font-bold text-foreground mb-4">
+                About MediTeck
               </h1>
-              <p className="mt-6 text-lg text-muted-foreground">
-                MediTeck is a comprehensive medical store management solution
-                designed to streamline pharmacy operations and enhance customer
-                service.
+              <p className="text-muted-foreground">
+                A comprehensive medical store management solution designed to simplify pharmacy operations.
               </p>
             </div>
           </div>
         </section>
 
         {/* Mission & Vision */}
-        <section className="py-20">
+        <section className="py-12">
           <div className="container">
-            <div className="grid gap-8 md:grid-cols-2">
-              <div className="card-medical">
-                <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-primary">
-                  <Target className="h-7 w-7 text-primary-foreground" />
-                </div>
-                <h2 className="font-heading text-2xl font-bold text-foreground">
+            <div className="grid gap-6 md:grid-cols-2">
+              <div className="border border-border rounded p-6 bg-card">
+                <h2 className="text-xl font-bold text-primary mb-3">
                   Our Mission
                 </h2>
-                <p className="mt-4 text-muted-foreground">
-                  To empower medical stores and pharmacies with cutting-edge
-                  technology that simplifies inventory management, enhances
-                  billing processes, and ensures better patient care through
-                  accurate medicine tracking and smart alerts.
+                <p className="text-muted-foreground">
+                  To empower medical stores and pharmacies with technology that simplifies 
+                  inventory management, enhances billing processes, and ensures better 
+                  patient care through accurate medicine tracking and smart alerts.
                 </p>
               </div>
 
-              <div className="card-medical">
-                <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-accent">
-                  <Eye className="h-7 w-7 text-primary-foreground" />
-                </div>
-                <h2 className="font-heading text-2xl font-bold text-foreground">
+              <div className="border border-border rounded p-6 bg-card">
+                <h2 className="text-xl font-bold text-primary mb-3">
                   Our Vision
                 </h2>
-                <p className="mt-4 text-muted-foreground">
-                  To become the leading pharmacy management solution in India,
-                  helping thousands of medical stores operate efficiently while
-                  maintaining the highest standards of healthcare and customer
-                  service.
+                <p className="text-muted-foreground">
+                  To become the leading pharmacy management solution in India, helping 
+                  thousands of medical stores operate efficiently while maintaining the 
+                  highest standards of healthcare and customer service.
                 </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Values */}
-        <section className="bg-muted/50 py-20">
+        {/* Core Values */}
+        <section className="bg-secondary py-12">
           <div className="container">
-            <div className="mx-auto max-w-2xl text-center">
-              <h2 className="font-heading text-3xl font-bold text-foreground md:text-4xl">
-                Our Core Values
-              </h2>
-              <p className="mt-4 text-muted-foreground">
-                The principles that guide everything we do at MediTeck.
-              </p>
-            </div>
+            <h2 className="text-2xl font-bold text-foreground text-center mb-8">
+              Our Core Values
+            </h2>
 
-            <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-              <div className="text-center">
-                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-secondary">
-                  <Heart className="h-8 w-8 text-primary" />
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+              <div className="text-center bg-card border border-border rounded p-4">
+                <div className="w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center mx-auto mb-3 text-lg">
+                  ♥
                 </div>
-                <h3 className="font-heading text-lg font-semibold text-foreground">
-                  Patient Safety
-                </h3>
-                <p className="mt-2 text-sm text-muted-foreground">
+                <h3 className="font-bold text-foreground mb-1">Patient Safety</h3>
+                <p className="text-sm text-muted-foreground">
                   Ensuring accurate medicine tracking to protect patient health.
                 </p>
               </div>
 
-              <div className="text-center">
-                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-secondary">
-                  <Award className="h-8 w-8 text-primary" />
+              <div className="text-center bg-card border border-border rounded p-4">
+                <div className="w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center mx-auto mb-3 text-lg">
+                  ★
                 </div>
-                <h3 className="font-heading text-lg font-semibold text-foreground">
-                  Excellence
-                </h3>
-                <p className="mt-2 text-sm text-muted-foreground">
+                <h3 className="font-bold text-foreground mb-1">Excellence</h3>
+                <p className="text-sm text-muted-foreground">
                   Delivering high-quality software with attention to detail.
                 </p>
               </div>
 
-              <div className="text-center">
-                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-secondary">
-                  <Users className="h-8 w-8 text-primary" />
+              <div className="text-center bg-card border border-border rounded p-4">
+                <div className="w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center mx-auto mb-3 text-lg">
+                  👥
                 </div>
-                <h3 className="font-heading text-lg font-semibold text-foreground">
-                  Customer Focus
-                </h3>
-                <p className="mt-2 text-sm text-muted-foreground">
+                <h3 className="font-bold text-foreground mb-1">Customer Focus</h3>
+                <p className="text-sm text-muted-foreground">
                   Building features that solve real pharmacy challenges.
                 </p>
               </div>
 
-              <div className="text-center">
-                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-secondary">
-                  <Zap className="h-8 w-8 text-primary" />
+              <div className="text-center bg-card border border-border rounded p-4">
+                <div className="w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center mx-auto mb-3 text-lg">
+                  ⚡
                 </div>
-                <h3 className="font-heading text-lg font-semibold text-foreground">
-                  Innovation
-                </h3>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  Leveraging AI and modern tech for smarter solutions.
+                <h3 className="font-bold text-foreground mb-1">Innovation</h3>
+                <p className="text-sm text-muted-foreground">
+                  Leveraging modern tech for smarter solutions.
                 </p>
               </div>
             </div>
@@ -128,36 +101,64 @@ const About = () => {
         </section>
 
         {/* Stats */}
-        <section className="py-20">
+        <section className="py-12">
           <div className="container">
-            <div className="grid gap-8 text-center md:grid-cols-4">
-              <div>
-                <div className="font-heading text-4xl font-bold text-primary md:text-5xl">
-                  500+
-                </div>
-                <div className="mt-2 text-muted-foreground">Active Stores</div>
+            <h2 className="text-2xl font-bold text-foreground text-center mb-8">
+              System Statistics
+            </h2>
+            <div className="grid gap-4 text-center md:grid-cols-4">
+              <div className="border border-border rounded p-4 bg-card">
+                <div className="text-3xl font-bold text-primary">500+</div>
+                <div className="text-sm text-muted-foreground">Active Stores</div>
               </div>
-              <div>
-                <div className="font-heading text-4xl font-bold text-primary md:text-5xl">
-                  50K+
-                </div>
-                <div className="mt-2 text-muted-foreground">
-                  Medicines Tracked
-                </div>
+              <div className="border border-border rounded p-4 bg-card">
+                <div className="text-3xl font-bold text-primary">50K+</div>
+                <div className="text-sm text-muted-foreground">Medicines Tracked</div>
               </div>
-              <div>
-                <div className="font-heading text-4xl font-bold text-primary md:text-5xl">
-                  1M+
-                </div>
-                <div className="mt-2 text-muted-foreground">
-                  Transactions Processed
-                </div>
+              <div className="border border-border rounded p-4 bg-card">
+                <div className="text-3xl font-bold text-primary">1M+</div>
+                <div className="text-sm text-muted-foreground">Transactions</div>
               </div>
-              <div>
-                <div className="font-heading text-4xl font-bold text-primary md:text-5xl">
-                  99.9%
-                </div>
-                <div className="mt-2 text-muted-foreground">Uptime</div>
+              <div className="border border-border rounded p-4 bg-card">
+                <div className="text-3xl font-bold text-primary">99.9%</div>
+                <div className="text-sm text-muted-foreground">Uptime</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Project Info for Blackbook */}
+        <section className="bg-secondary py-12">
+          <div className="container">
+            <div className="max-w-2xl mx-auto text-center">
+              <h2 className="text-2xl font-bold text-foreground mb-4">
+                Project Information
+              </h2>
+              <div className="border border-border rounded p-6 bg-card text-left">
+                <table className="w-full text-sm">
+                  <tbody>
+                    <tr className="border-b border-border">
+                      <td className="py-2 font-bold">Project Name:</td>
+                      <td className="py-2">MediTeck - Medical Store Management System</td>
+                    </tr>
+                    <tr className="border-b border-border">
+                      <td className="py-2 font-bold">University:</td>
+                      <td className="py-2">Mumbai University</td>
+                    </tr>
+                    <tr className="border-b border-border">
+                      <td className="py-2 font-bold">Technology Used:</td>
+                      <td className="py-2">React, TypeScript, Tailwind CSS, PostgreSQL</td>
+                    </tr>
+                    <tr className="border-b border-border">
+                      <td className="py-2 font-bold">Developer:</td>
+                      <td className="py-2">Ayush Gupta</td>
+                    </tr>
+                    <tr>
+                      <td className="py-2 font-bold">Contact:</td>
+                      <td className="py-2">ayushgupta69904@gmail.com</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>

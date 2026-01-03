@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
 
 const benefits = [
   "Easy medicine tracking",
@@ -13,57 +12,34 @@ const benefits = [
 
 const CTASection = () => {
   return (
-    <section className="relative overflow-hidden bg-gradient-primary py-20 lg:py-28">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute -left-20 -top-20 h-80 w-80 rounded-full bg-primary-foreground blur-3xl" />
-        <div className="absolute -bottom-20 -right-20 h-80 w-80 rounded-full bg-primary-foreground blur-3xl" />
-      </div>
-
-      <div className="container relative">
-        <div className="grid items-center gap-12 lg:grid-cols-2">
-          <div className="space-y-6 text-center lg:text-left">
-            <h2 className="font-heading text-3xl font-bold text-primary-foreground md:text-4xl lg:text-5xl">
-              Ready to Transform Your Medical Store?
+    <section className="py-16 bg-primary text-primary-foreground">
+      <div className="container">
+        <div className="grid gap-8 lg:grid-cols-2 items-center">
+          <div className="text-center lg:text-left">
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">
+              Ready to Use MediTeck?
             </h2>
-            <p className="mx-auto max-w-lg text-lg text-primary-foreground/80 lg:mx-0">
-              Join hundreds of pharmacies already using MediTeck to streamline
-              their operations and boost productivity.
+            <p className="mb-6 opacity-90">
+              Start managing your medical store efficiently with our complete solution.
             </p>
-            <div className="flex flex-col items-center gap-4 pt-4 sm:flex-row lg:justify-start">
-              <Button
-                size="lg"
-                variant="secondary"
-                asChild
-                className="gap-2 px-8"
-              >
-                <Link to="/login/admin">
-                  Start Free Trial
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+              <Button variant="secondary" size="lg" asChild>
+                <Link to="/login">Start Now</Link>
               </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                asChild
-                className="gap-2 border-primary-foreground/20 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"
-              >
-                <Link to="/contact">Contact Sales</Link>
+              <Button variant="outline" size="lg" asChild className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10">
+                <Link to="/contact">Contact Us</Link>
               </Button>
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            {benefits.map((benefit, index) => (
+          <div className="grid grid-cols-2 gap-3">
+            {benefits.map((benefit) => (
               <div
                 key={benefit}
-                className="flex items-center gap-3 rounded-lg bg-primary-foreground/10 p-4 backdrop-blur-sm"
-                style={{ animationDelay: `${index * 100}ms` }}
+                className="flex items-center gap-2 bg-primary-foreground/10 rounded p-3"
               >
-                <CheckCircle2 className="h-5 w-5 flex-shrink-0 text-primary-foreground" />
-                <span className="text-sm font-medium text-primary-foreground">
-                  {benefit}
-                </span>
+                <span className="text-lg">✓</span>
+                <span className="text-sm">{benefit}</span>
               </div>
             ))}
           </div>
