@@ -5,3 +5,12 @@ verify_jwt = false
 
 [functions.send-contact-email]
 verify_jwt = false
+
+[functions.send-alert-notifications]
+verify_jwt = false
+
+[functions.check-alerts-cron]
+verify_jwt = false
+
+[functions.daily-alert-report]
+verify_jwt = false
