@@ -156,6 +156,53 @@ export type Database = {
         }
         Relationships: []
       }
+      notification_logs: {
+        Row: {
+          alert_id: string | null
+          created_at: string
+          error_message: string | null
+          id: string
+          message: string
+          notification_type: string
+          recipient: string
+          status: string
+          subject: string | null
+          user_id: string | null
+        }
+        Insert: {
+          alert_id?: string | null
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          message: string
+          notification_type: string
+          recipient: string
+          status?: string
+          subject?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          alert_id?: string | null
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          message?: string
+          notification_type?: string
+          recipient?: string
+          status?: string
+          subject?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notification_logs_alert_id_fkey"
+            columns: ["alert_id"]
+            isOneToOne: false
+            referencedRelation: "alerts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           created_at: string | null
@@ -163,6 +210,10 @@ export type Database = {
           id: string
           mobile: string | null
           name: string
+          notify_email: boolean | null
+          notify_expiry: boolean | null
+          notify_low_stock: boolean | null
+          notify_sms: boolean | null
         }
         Insert: {
           created_at?: string | null
@@ -170,6 +221,10 @@ export type Database = {
           id: string
           mobile?: string | null
           name: string
+          notify_email?: boolean | null
+          notify_expiry?: boolean | null
+          notify_low_stock?: boolean | null
+          notify_sms?: boolean | null
         }
         Update: {
           created_at?: string | null
@@ -177,6 +232,10 @@ export type Database = {
           id?: string
           mobile?: string | null
           name?: string
+          notify_email?: boolean | null
+          notify_expiry?: boolean | null
+          notify_low_stock?: boolean | null
+          notify_sms?: boolean | null
         }
         Relationships: []
       }

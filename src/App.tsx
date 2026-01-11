@@ -17,6 +17,7 @@ import AdminDashboard from "./pages/dashboard/AdminDashboard";
 import MedicinesPage from "./pages/dashboard/MedicinesPage";
 import BillingPage from "./pages/dashboard/BillingPage";
 import AlertsPage from "./pages/dashboard/AlertsPage";
+import NotificationSettingsPage from "./pages/dashboard/NotificationSettingsPage";
 import SalesPage from "./pages/admin/SalesPage";
 import ReportsPage from "./pages/admin/ReportsPage";
 import AuditLogsPage from "./pages/admin/AuditLogsPage";
@@ -52,6 +53,9 @@ const App = () => (
             } />
             <Route path="/dashboard/alerts" element={
               <ProtectedRoute><AlertsPage /></ProtectedRoute>
+            } />
+            <Route path="/dashboard/notifications" element={
+              <ProtectedRoute><NotificationSettingsPage /></ProtectedRoute>
             } />
 
             {/* Admin Routes */}

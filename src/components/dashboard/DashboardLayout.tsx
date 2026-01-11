@@ -42,6 +42,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
     { name: 'Medicines', href: '/dashboard/medicines', icon: Package },
     { name: 'Billing', href: '/dashboard/billing', icon: Receipt },
     { name: 'Alerts', href: '/dashboard/alerts', icon: Bell },
+    { name: 'Notifications', href: '/dashboard/notifications', icon: Settings },
   ];
 
   const adminNavItems = [
