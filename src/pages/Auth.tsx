@@ -328,7 +328,7 @@ const Auth = () => {
 
           <p className="mt-6 text-center text-sm text-muted-foreground">
             Admin?{' '}
-            <Link to="/admin-login" className="text-primary hover:underline">
+            <Link to="/admin-login" className="text-primary">
               Login as Admin
             </Link>
           </p>

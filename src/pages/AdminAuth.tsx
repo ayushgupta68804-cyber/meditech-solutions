@@ -177,7 +177,7 @@ const AdminAuth = () => {
 
           <p className="mt-6 text-center text-sm text-muted-foreground">
             Staff member?{' '}
-            <Link to="/login" className="text-primary hover:underline">
+            <Link to="/login" className="text-primary">
               Login as Staff
             </Link>
           </p>
