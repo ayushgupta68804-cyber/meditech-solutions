@@ -161,7 +161,7 @@ const AdminAuth = () => {
 
             <Button
               type="submit"
-              className="h-12 w-full bg-gradient-primary"
+              className="h-12 w-full bg-gradient-primary text-primary-foreground"
               disabled={isLoading}
             >
               {isLoading ? (
