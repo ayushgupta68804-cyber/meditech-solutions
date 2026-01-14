@@ -26,7 +26,7 @@ const CTASection = () => {
               <Button variant="secondary" size="lg" asChild>
                 <Link to="/login">Start Now</Link>
               </Button>
-              <Button variant="outline" size="lg" asChild className="border-primary-foreground/30 text-primary-foreground">
+              <Button variant="outline" size="lg" asChild className="border-primary-foreground/30 bg-transparent text-primary-foreground">
                 <Link to="/contact">Contact Us</Link>
               </Button>
             </div>
