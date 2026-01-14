@@ -150,7 +150,7 @@ const Features = () => {
               {features.map((feature, index) => (
                 <div
                   key={feature.title}
-                  className="border border-border rounded p-4 bg-card hover:border-primary"
+                  className="border border-border rounded p-4 bg-card"
                 >
                   <div className="flex items-center gap-2 mb-3">
                     <span className="w-8 h-8 bg-primary text-primary-foreground rounded flex items-center justify-center text-sm font-bold">
