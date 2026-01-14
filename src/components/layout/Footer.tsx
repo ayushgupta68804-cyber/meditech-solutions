@@ -17,16 +17,16 @@ const Footer = () => {
           <div>
             <h4 className="font-bold text-foreground mb-2">Quick Links</h4>
             <nav className="flex flex-col gap-1">
-              <Link to="/" className="text-sm text-muted-foreground hover:text-primary hover:underline">
+              <Link to="/" className="text-sm text-muted-foreground">
                 Home
               </Link>
-              <Link to="/features" className="text-sm text-muted-foreground hover:text-primary hover:underline">
+              <Link to="/features" className="text-sm text-muted-foreground">
                 Features
               </Link>
-              <Link to="/about" className="text-sm text-muted-foreground hover:text-primary hover:underline">
+              <Link to="/about" className="text-sm text-muted-foreground">
                 About Us
               </Link>
-              <Link to="/contact" className="text-sm text-muted-foreground hover:text-primary hover:underline">
+              <Link to="/contact" className="text-sm text-muted-foreground">
                 Contact
               </Link>
             </nav>
