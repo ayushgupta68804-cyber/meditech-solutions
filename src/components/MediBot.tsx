@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Bot, Send, X, Loader2, Sparkles } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -18,8 +19,26 @@ const MediBot = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
+
+  useEffect(() => {
+    // Check authentication status
+    const checkAuth = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      setIsAuthenticated(!!session);
+    };
+    
+    checkAuth();
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_, session) => {
+      setIsAuthenticated(!!session);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -29,6 +48,18 @@ const MediBot = () => {
 
   const sendMessage = async () => {
     if (!input.trim() || isLoading) return;
+
+    // Get current session for auth token
+    const { data: { session } } = await supabase.auth.getSession();
+    
+    if (!session) {
+      toast({
+        title: 'Authentication Required',
+        description: 'Please log in to use MediBot.',
+        variant: 'destructive',
+      });
+      return;
+    }
 
     const userMessage: Message = { role: 'user', content: input.trim() };
     setMessages((prev) => [...prev, userMessage]);
@@ -42,13 +73,16 @@ const MediBot = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+          'Authorization': `Bearer ${session.access_token}`,
         },
         body: JSON.stringify({ messages: [...messages, userMessage] }),
       });
 
       if (!response.ok) {
         const errorData = await response.json();
+        if (response.status === 401) {
+          throw new Error('Please log in to use MediBot');
+        }
         throw new Error(errorData.error || 'Failed to get response');
       }
 
@@ -148,7 +182,15 @@ const MediBot = () => {
           </CardHeader>
           <CardContent className="p-0">
             <ScrollArea className="h-[350px] p-4" ref={scrollRef}>
-              {messages.length === 0 ? (
+              {!isAuthenticated ? (
+                <div className="flex h-full flex-col items-center justify-center text-center">
+                  <Bot className="mb-3 h-12 w-12 text-muted-foreground/50" />
+                  <p className="text-sm font-medium">Login Required</p>
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    Please log in to use MediBot and get medicine information.
+                  </p>
+                </div>
+              ) : messages.length === 0 ? (
                 <div className="flex h-full flex-col items-center justify-center text-center">
                   <Bot className="mb-3 h-12 w-12 text-primary/50" />
                   <p className="text-sm font-medium">Hi! I'm MediBot 👋</p>
@@ -206,13 +248,17 @@ const MediBot = () => {
             <div className="border-t p-3">
               <div className="flex gap-2">
                 <Input
-                  placeholder="Ask about any medicine..."
+                  placeholder={isAuthenticated ? "Ask about any medicine..." : "Please log in to chat"}
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={handleKeyDown}
-                  disabled={isLoading}
+                  disabled={isLoading || !isAuthenticated}
                 />
-                <Button onClick={sendMessage} disabled={!input.trim() || isLoading} size="icon">
+                <Button 
+                  onClick={sendMessage} 
+                  disabled={!input.trim() || isLoading || !isAuthenticated} 
+                  size="icon"
+                >
                   {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
                 </Button>
               </div>
