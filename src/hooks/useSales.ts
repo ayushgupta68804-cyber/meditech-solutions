@@ -142,47 +142,50 @@ export const useCreateSale = () => {
 
       if (itemsError) throw itemsError;
 
-      // Update medicine quantities
+      // Update medicine quantities atomically to prevent race conditions
       for (const item of input.items) {
-        const { data: medicine } = await supabase
-          .from('medicines')
-          .select('quantity')
-          .eq('id', item.medicine_id)
-          .single();
-
-        if (medicine) {
-          const newQuantity = medicine.quantity - item.quantity;
-          
-          await supabase
-            .from('medicines')
-            .update({ quantity: newQuantity })
-            .eq('id', item.medicine_id);
-
-          // Log inventory change
-          await supabase.from('inventory_logs').insert({
-            medicine_id: item.medicine_id,
-            change_amount: -item.quantity,
-            reason: `Sale: ${sale.id}`,
+        // Use atomic decrement function to prevent race conditions
+        const { data: newQuantity, error: decrementError } = await supabase
+          .rpc('decrement_medicine_quantity', {
+            _medicine_id: item.medicine_id,
+            _amount: item.quantity
           });
 
-          // Create alert if low stock
-          if (newQuantity <= 5) {
-            // Get medicine name for alert
-            const { data: med } = await supabase
-              .from('medicines')
-              .select('name')
-              .eq('id', item.medicine_id)
-              .single();
-            const medicineName = med?.name || 'Unknown medicine';
-            
-            await supabase.from('alerts').insert({
-              medicine_id: item.medicine_id,
-              type: newQuantity === 0 ? 'OUT_OF_STOCK' : 'LOW_STOCK',
-              message: newQuantity === 0 
-                ? `${medicineName} is out of stock!`
-                : `${medicineName} is running low (${newQuantity} left)`,
-            });
-          }
+        if (decrementError) {
+          // If we failed to decrement, we should handle the error
+          // The sale and items have already been created, so we need to handle this gracefully
+          console.error('Failed to update medicine quantity:', decrementError);
+          throw new Error(
+            decrementError.message.includes('Insufficient') 
+              ? `Insufficient stock for one or more medicines` 
+              : `Failed to update inventory: ${decrementError.message}`
+          );
+        }
+
+        // Log inventory change
+        await supabase.from('inventory_logs').insert({
+          medicine_id: item.medicine_id,
+          change_amount: -item.quantity,
+          reason: `Sale: ${sale.id}`,
+        });
+
+        // Create alert if low stock (newQuantity is returned from the atomic function)
+        if (newQuantity !== null && newQuantity <= 5) {
+          // Get medicine name for alert
+          const { data: med } = await supabase
+            .from('medicines')
+            .select('name')
+            .eq('id', item.medicine_id)
+            .single();
+          const medicineName = med?.name || 'Unknown medicine';
+          
+          await supabase.from('alerts').insert({
+            medicine_id: item.medicine_id,
+            type: newQuantity === 0 ? 'OUT_OF_STOCK' : 'LOW_STOCK',
+            message: newQuantity === 0 
+              ? `${medicineName} is out of stock!`
+              : `${medicineName} is running low (${newQuantity} left)`,
+          });
         }
       }
 
