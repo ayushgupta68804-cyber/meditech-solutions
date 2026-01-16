@@ -42,7 +42,9 @@ export const useMedicines = (search?: string) => {
         .order('created_at', { ascending: false });
 
       if (search) {
-        query = query.or(`name.ilike.%${search}%,barcode.ilike.%${search}%,batch_no.ilike.%${search}%`);
+        // Sanitize and limit search input to prevent performance issues
+        const sanitizedSearch = search.trim().slice(0, 100);
+        query = query.or(`name.ilike.%${sanitizedSearch}%,barcode.ilike.%${sanitizedSearch}%,batch_no.ilike.%${sanitizedSearch}%`);
       }
 
       const { data, error } = await query;
