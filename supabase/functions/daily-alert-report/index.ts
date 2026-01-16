@@ -10,9 +10,31 @@ const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
 const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
+// Validate cron secret for authentication
+function validateCronAuth(req: Request): boolean {
+  const authHeader = req.headers.get('Authorization');
+  const cronSecret = Deno.env.get('CRON_SECRET_KEY');
+  
+  if (!cronSecret) {
+    console.error('CRON_SECRET_KEY not configured');
+    return false;
+  }
+  
+  return authHeader === `Bearer ${cronSecret}`;
+}
+
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
+  }
+
+  // Validate authentication
+  if (!validateCronAuth(req)) {
+    console.log('Unauthorized cron request attempted');
+    return new Response(
+      JSON.stringify({ error: "Unauthorized" }),
+      { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+    );
   }
 
   try {
@@ -63,7 +85,7 @@ serve(async (req) => {
 
   } catch (error: any) {
     console.error("Error in daily-alert-report:", error);
-    return new Response(JSON.stringify({ error: error.message }), {
+    return new Response(JSON.stringify({ error: "An error occurred processing the request" }), {
       status: 500,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
