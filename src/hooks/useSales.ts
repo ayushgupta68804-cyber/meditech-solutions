@@ -169,24 +169,8 @@ export const useCreateSale = () => {
           reason: `Sale: ${sale.id}`,
         });
 
-        // Create alert if low stock (newQuantity is returned from the atomic function)
-        if (newQuantity !== null && newQuantity <= 5) {
-          // Get medicine name for alert
-          const { data: med } = await supabase
-            .from('medicines')
-            .select('name')
-            .eq('id', item.medicine_id)
-            .single();
-          const medicineName = med?.name || 'Unknown medicine';
-          
-          await supabase.from('alerts').insert({
-            medicine_id: item.medicine_id,
-            type: newQuantity === 0 ? 'OUT_OF_STOCK' : 'LOW_STOCK',
-            message: newQuantity === 0 
-              ? `${medicineName} is out of stock!`
-              : `${medicineName} is running low (${newQuantity} left)`,
-          });
-        }
+        // Note: Stock alerts are now automatically created by database trigger
+        // when medicine quantity drops below threshold
       }
 
       // Log to audit
