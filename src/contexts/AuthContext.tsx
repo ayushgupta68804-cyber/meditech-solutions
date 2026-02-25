@@ -94,19 +94,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       });
       return { error };
     } else {
-      // For mobile login, we need to find the email first
-      const { data: profile, error: profileError } = await supabase
-        .from('profiles')
-        .select('email')
-        .eq('mobile', identifier)
-        .maybeSingle();
+      // For mobile login, use security definer function to find email
+      const { data: email, error: lookupError } = await supabase
+        .rpc('get_email_by_mobile', { _mobile: identifier });
 
-      if (profileError || !profile?.email) {
+      if (lookupError || !email) {
         return { error: new Error('User not found with this mobile number') };
       }
 
       const { error } = await supabase.auth.signInWithPassword({
-        email: profile.email,
+        email: email,
         password,
       });
       return { error };
