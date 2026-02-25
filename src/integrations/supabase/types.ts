@@ -335,6 +335,7 @@ export type Database = {
         Args: { _amount: number; _medicine_id: string }
         Returns: number
       }
+      get_email_by_mobile: { Args: { _mobile: string }; Returns: string }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
