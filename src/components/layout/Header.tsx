@@ -11,27 +11,19 @@ const Header = () => {
       <div className="container flex h-14 items-center justify-between">
         <Link to="/" className="flex items-center gap-2">
           <span className="text-xl font-bold text-primary">
-            MediTeck
+            MediTech
           </span>
           <span className="text-xs bg-primary text-primary-foreground px-2 py-0.5 rounded">
-            Pharmacy System
+            Pharmacy
           </span>
         </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden items-center gap-6 md:flex">
-          <Link to="/" className="text-sm font-medium">
-            Home
-          </Link>
-          <Link to="/features" className="text-sm font-medium">
-            Features
-          </Link>
-          <Link to="/about" className="text-sm font-medium">
-            About
-          </Link>
-          <Link to="/contact" className="text-sm font-medium">
-            Contact
-          </Link>
+          <Link to="/" className="text-sm font-medium">Home</Link>
+          <Link to="/features" className="text-sm font-medium">Features</Link>
+          <Link to="/about" className="text-sm font-medium">About</Link>
+          <Link to="/contact" className="text-sm font-medium">Contact</Link>
         </nav>
 
         {/* Auth Buttons */}
@@ -57,18 +49,10 @@ const Header = () => {
       {isMenuOpen && (
         <div className="border-t border-border bg-background p-4 md:hidden">
           <nav className="flex flex-col gap-3">
-            <Link to="/" className="text-sm font-medium" onClick={() => setIsMenuOpen(false)}>
-              Home
-            </Link>
-            <Link to="/features" className="text-sm font-medium" onClick={() => setIsMenuOpen(false)}>
-              Features
-            </Link>
-            <Link to="/about" className="text-sm font-medium" onClick={() => setIsMenuOpen(false)}>
-              About
-            </Link>
-            <Link to="/contact" className="text-sm font-medium" onClick={() => setIsMenuOpen(false)}>
-              Contact
-            </Link>
+            <Link to="/" className="text-sm font-medium" onClick={() => setIsMenuOpen(false)}>Home</Link>
+            <Link to="/features" className="text-sm font-medium" onClick={() => setIsMenuOpen(false)}>Features</Link>
+            <Link to="/about" className="text-sm font-medium" onClick={() => setIsMenuOpen(false)}>About</Link>
+            <Link to="/contact" className="text-sm font-medium" onClick={() => setIsMenuOpen(false)}>Contact</Link>
             <hr className="my-2" />
             <Button variant="outline" size="sm" asChild className="w-full">
               <Link to="/login">Staff Login</Link>

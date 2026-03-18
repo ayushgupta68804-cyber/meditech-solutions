@@ -31,11 +31,9 @@ const Auth = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   
-  // Login form
   const [identifier, setIdentifier] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
   
-  // Signup form
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [mobile, setMobile] = useState('');
@@ -92,11 +90,8 @@ const Auth = () => {
     setErrors({});
 
     const result = signupSchema.safeParse({
-      name,
-      email,
-      mobile,
-      password: signupPassword,
-      confirmPassword,
+      name, email, mobile,
+      password: signupPassword, confirmPassword,
     });
 
     if (!result.success) {
@@ -129,7 +124,7 @@ const Auth = () => {
     } else {
       toast({
         title: 'Account Created!',
-        description: 'Welcome to MediTeck',
+        description: 'Welcome to MediTech',
       });
     }
   };
@@ -139,10 +134,7 @@ const Auth = () => {
       {/* Left Panel - Form */}
       <div className="flex w-full flex-col justify-center px-6 py-12 lg:w-1/2 lg:px-12">
         <div className="mx-auto w-full max-w-md">
-          <Link
-            to="/"
-            className="mb-8 inline-flex items-center gap-2 text-sm text-muted-foreground"
-          >
+          <Link to="/" className="mb-8 inline-flex items-center gap-2 text-sm text-muted-foreground">
             <ArrowLeft className="h-4 w-4" />
             Back to Home
           </Link>
@@ -152,12 +144,8 @@ const Auth = () => {
               <Pill className="h-6 w-6 text-primary-foreground" />
             </div>
             <div>
-              <h1 className="font-heading text-2xl font-bold text-foreground">
-                Staff Portal
-              </h1>
-              <p className="text-sm text-muted-foreground">
-                Access your dashboard
-              </p>
+              <h1 className="font-heading text-2xl font-bold text-foreground">Staff Portal</h1>
+              <p className="text-sm text-muted-foreground">Access your dashboard</p>
             </div>
           </div>
 
@@ -171,56 +159,21 @@ const Auth = () => {
               <form onSubmit={handleLogin} className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="identifier">Email or Mobile</Label>
-                  <Input
-                    id="identifier"
-                    type="text"
-                    placeholder="Enter email or mobile number"
-                    value={identifier}
-                    onChange={(e) => setIdentifier(e.target.value)}
-                    className="h-12"
-                  />
-                  {errors.identifier && (
-                    <p className="text-sm text-destructive">{errors.identifier}</p>
-                  )}
+                  <Input id="identifier" type="text" placeholder="Enter email or mobile number" value={identifier} onChange={(e) => setIdentifier(e.target.value)} className="h-12" />
+                  {errors.identifier && <p className="text-sm text-destructive">{errors.identifier}</p>}
                 </div>
-
                 <div className="space-y-2">
                   <Label htmlFor="login-password">Password</Label>
                   <div className="relative">
-                    <Input
-                      id="login-password"
-                      type={showPassword ? 'text' : 'password'}
-                      placeholder="Enter your password"
-                      value={loginPassword}
-                      onChange={(e) => setLoginPassword(e.target.value)}
-                      className="h-12 pr-12"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground"
-                    >
+                    <Input id="login-password" type={showPassword ? 'text' : 'password'} placeholder="Enter your password" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} className="h-12 pr-12" />
+                    <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground">
                       {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                     </button>
                   </div>
-                  {errors.password && (
-                    <p className="text-sm text-destructive">{errors.password}</p>
-                  )}
+                  {errors.password && <p className="text-sm text-destructive">{errors.password}</p>}
                 </div>
-
-                <Button
-                  type="submit"
-                  className="h-12 w-full bg-gradient-primary text-primary-foreground"
-                  disabled={isLoading}
-                >
-                  {isLoading ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Signing in...
-                    </>
-                  ) : (
-                    'Sign In'
-                  )}
+                <Button type="submit" className="h-12 w-full bg-gradient-primary text-primary-foreground" disabled={isLoading}>
+                  {isLoading ? (<><Loader2 className="mr-2 h-4 w-4 animate-spin" />Signing in...</>) : ('Sign In')}
                 </Button>
               </form>
             </TabsContent>
@@ -229,98 +182,35 @@ const Auth = () => {
               <form onSubmit={handleSignup} className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="name">Full Name</Label>
-                  <Input
-                    id="name"
-                    type="text"
-                    placeholder="Enter your full name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="h-12"
-                  />
-                  {errors.name && (
-                    <p className="text-sm text-destructive">{errors.name}</p>
-                  )}
+                  <Input id="name" type="text" placeholder="Enter your full name" value={name} onChange={(e) => setName(e.target.value)} className="h-12" />
+                  {errors.name && <p className="text-sm text-destructive">{errors.name}</p>}
                 </div>
-
                 <div className="space-y-2">
                   <Label htmlFor="email">Email</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="Enter your email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="h-12"
-                  />
-                  {errors.email && (
-                    <p className="text-sm text-destructive">{errors.email}</p>
-                  )}
+                  <Input id="email" type="email" placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)} className="h-12" />
+                  {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
                 </div>
-
                 <div className="space-y-2">
                   <Label htmlFor="mobile">Mobile (Optional)</Label>
-                  <Input
-                    id="mobile"
-                    type="tel"
-                    placeholder="Enter your mobile number"
-                    value={mobile}
-                    onChange={(e) => setMobile(e.target.value)}
-                    className="h-12"
-                  />
+                  <Input id="mobile" type="tel" placeholder="Enter your mobile number" value={mobile} onChange={(e) => setMobile(e.target.value)} className="h-12" />
                 </div>
-
                 <div className="space-y-2">
                   <Label htmlFor="signup-password">Password</Label>
                   <div className="relative">
-                    <Input
-                      id="signup-password"
-                      type={showPassword ? 'text' : 'password'}
-                      placeholder="Create a password"
-                      value={signupPassword}
-                      onChange={(e) => setSignupPassword(e.target.value)}
-                      className="h-12 pr-12"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground"
-                    >
+                    <Input id="signup-password" type={showPassword ? 'text' : 'password'} placeholder="Create a password" value={signupPassword} onChange={(e) => setSignupPassword(e.target.value)} className="h-12 pr-12" />
+                    <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground">
                       {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                     </button>
                   </div>
-                  {errors.password && (
-                    <p className="text-sm text-destructive">{errors.password}</p>
-                  )}
+                  {errors.password && <p className="text-sm text-destructive">{errors.password}</p>}
                 </div>
-
                 <div className="space-y-2">
                   <Label htmlFor="confirm-password">Confirm Password</Label>
-                  <Input
-                    id="confirm-password"
-                    type="password"
-                    placeholder="Confirm your password"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="h-12"
-                  />
-                  {errors.confirmPassword && (
-                    <p className="text-sm text-destructive">{errors.confirmPassword}</p>
-                  )}
+                  <Input id="confirm-password" type="password" placeholder="Confirm your password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="h-12" />
+                  {errors.confirmPassword && <p className="text-sm text-destructive">{errors.confirmPassword}</p>}
                 </div>
-
-                <Button
-                  type="submit"
-                  className="h-12 w-full bg-gradient-primary text-primary-foreground"
-                  disabled={isLoading}
-                >
-                  {isLoading ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Creating account...
-                    </>
-                  ) : (
-                    'Create Account'
-                  )}
+                <Button type="submit" className="h-12 w-full bg-gradient-primary text-primary-foreground" disabled={isLoading}>
+                  {isLoading ? (<><Loader2 className="mr-2 h-4 w-4 animate-spin" />Creating account...</>) : ('Create Account')}
                 </Button>
               </form>
             </TabsContent>
@@ -328,9 +218,7 @@ const Auth = () => {
 
           <p className="mt-6 text-center text-sm text-muted-foreground">
             Admin?{' '}
-            <Link to="/admin-login" className="text-primary">
-              Login as Admin
-            </Link>
+            <Link to="/admin-login" className="text-primary">Login as Admin</Link>
           </p>
         </div>
       </div>
@@ -344,7 +232,7 @@ const Auth = () => {
             </div>
           </div>
           <h2 className="font-heading text-3xl font-bold text-primary-foreground">
-            MediTeck Staff Portal
+            MediTech Staff Portal
           </h2>
           <p className="mt-4 text-lg text-primary-foreground/80">
             Manage inventory, create bills, and track medicines efficiently from your staff dashboard.

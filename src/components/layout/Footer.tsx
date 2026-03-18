@@ -7,9 +7,9 @@ const Footer = () => {
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div>
-            <h4 className="font-bold text-primary text-lg mb-2">MediTeck</h4>
+            <h4 className="font-bold text-primary text-lg mb-2">MediTech</h4>
             <p className="text-sm text-muted-foreground">
-              Medical Store Management System - A complete solution for pharmacy operations.
+              Smart Pharmacy Solution - A complete platform for pharmacy operations.
             </p>
           </div>
 
@@ -17,18 +17,10 @@ const Footer = () => {
           <div>
             <h4 className="font-bold text-foreground mb-2">Quick Links</h4>
             <nav className="flex flex-col gap-1">
-              <Link to="/" className="text-sm text-muted-foreground">
-                Home
-              </Link>
-              <Link to="/features" className="text-sm text-muted-foreground">
-                Features
-              </Link>
-              <Link to="/about" className="text-sm text-muted-foreground">
-                About Us
-              </Link>
-              <Link to="/contact" className="text-sm text-muted-foreground">
-                Contact
-              </Link>
+              <Link to="/" className="text-sm text-muted-foreground">Home</Link>
+              <Link to="/features" className="text-sm text-muted-foreground">Features</Link>
+              <Link to="/about" className="text-sm text-muted-foreground">About Us</Link>
+              <Link to="/contact" className="text-sm text-muted-foreground">Contact</Link>
             </nav>
           </div>
 
@@ -56,7 +48,7 @@ const Footer = () => {
 
         <div className="mt-6 pt-4 border-t border-border text-center">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} MediTeck - Medical Store Management System
+            © {new Date().getFullYear()} MediTech - Smart Pharmacy Solution
           </p>
           <p className="text-xs text-muted-foreground mt-1">
             Developed for Mumbai University Project

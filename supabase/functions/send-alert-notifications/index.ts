@@ -45,7 +45,7 @@ interface UserProfile {
 async function sendEmail(to: string, subject: string, htmlContent: string): Promise<{ success: boolean; error?: string }> {
   try {
     const response = await resend.emails.send({
-      from: "MediTeck Alerts <onboarding@resend.dev>",
+      from: "MediTech Alerts <onboarding@resend.dev>",
       to: [to],
       subject: subject,
       html: htmlContent,
@@ -98,7 +98,7 @@ async function sendSMS(to: string, message: string): Promise<{ success: boolean;
 
 // Generate email HTML template
 function generateEmailTemplate(alerts: AlertData[], type: "instant" | "daily"): string {
-  const title = type === "daily" ? "📋 Daily MediTeck Alert Report" : "🚨 MediTeck Instant Alert";
+  const title = type === "daily" ? "📋 Daily MediTech Alert Report" : "🚨 MediTech Instant Alert";
   
   const alertRows = alerts.map(alert => {
     const icon = alert.type === "low_stock" ? "📦" : alert.type === "expiry" ? "⏰" : "❌";
@@ -131,7 +131,7 @@ function generateEmailTemplate(alerts: AlertData[], type: "instant" | "daily"): 
       <div class="container">
         <div class="header">
           <h1 style="margin: 0;">${title}</h1>
-          <p style="margin: 8px 0 0 0;">MediTeck Pharmacy Management System</p>
+          <p style="margin: 8px 0 0 0;">MediTech Smart Pharmacy Solution</p>
         </div>
         <div class="content">
           <p>You have <strong>${alerts.length}</strong> alert(s) that require your attention:</p>
@@ -155,8 +155,8 @@ function generateEmailTemplate(alerts: AlertData[], type: "instant" | "daily"): 
           </p>
         </div>
         <div class="footer">
-          <p>This is an automated alert from MediTeck Pharmacy System.</p>
-          <p>© 2024-25 MediTeck - Mumbai University Project</p>
+          <p>This is an automated alert from MediTech Pharmacy.</p>
+          <p>© 2024-25 MediTech - Mumbai University Project</p>
         </div>
       </div>
     </body>
@@ -169,10 +169,10 @@ function generateSMSMessage(alerts: AlertData[], type: "instant" | "daily"): str
   if (type === "daily") {
     const lowStockCount = alerts.filter(a => a.type === "low_stock").length;
     const expiryCount = alerts.filter(a => a.type === "expiry").length;
-    return `MediTeck Daily Alert: ${lowStockCount} low stock, ${expiryCount} expiring medicines. Check dashboard for details.`;
+    return `MediTech Daily Alert: ${lowStockCount} low stock, ${expiryCount} expiring medicines. Check dashboard for details.`;
   } else {
     const alert = alerts[0];
-    return `MediTeck Alert: ${alert.message}`;
+    return `MediTech Alert: ${alert.message}`;
   }
 }
 
@@ -284,8 +284,8 @@ serve(async (req) => {
       // Send Email
       if (user.notify_email && user.email) {
         const subject = type === "daily" 
-          ? `📋 MediTeck Daily Report - ${userAlerts.length} Alerts`
-          : `🚨 MediTeck Alert: ${userAlerts[0].message}`;
+          ? `📋 MediTech Daily Report - ${userAlerts.length} Alerts`
+          : `🚨 MediTech Alert: ${userAlerts[0].message}`;
         
         const htmlContent = generateEmailTemplate(userAlerts as AlertData[], type);
         const emailResult = await sendEmail(user.email, subject, htmlContent);
