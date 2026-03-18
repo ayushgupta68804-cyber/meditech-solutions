@@ -98,7 +98,7 @@ async function sendSMS(to: string, message: string): Promise<{ success: boolean;
 
 // Generate email HTML template
 function generateEmailTemplate(alerts: AlertData[], type: "instant" | "daily"): string {
-  const title = type === "daily" ? "📋 Daily MediTeck Alert Report" : "🚨 MediTeck Instant Alert";
+  const title = type === "daily" ? "📋 Daily MediTech Alert Report" : "🚨 MediTech Instant Alert";
   
   const alertRows = alerts.map(alert => {
     const icon = alert.type === "low_stock" ? "📦" : alert.type === "expiry" ? "⏰" : "❌";
