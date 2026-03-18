@@ -76,10 +76,10 @@ const AdminAuth = () => {
             </div>
           </div>
           <h2 className="font-heading text-3xl font-bold text-primary-foreground">
-            MediTeck Admin Portal
+            MediTech Admin Portal
           </h2>
           <p className="mt-4 text-lg text-primary-foreground/80">
-            Full control over your medical store. Manage users, view reports, and oversee all operations.
+            Full control over your pharmacy. Manage users, view reports, and oversee all operations.
           </p>
           <div className="mt-8 grid grid-cols-2 gap-4">
             <div className="rounded-lg bg-primary-foreground/10 p-4 text-left backdrop-blur-sm">
@@ -97,10 +97,7 @@ const AdminAuth = () => {
       {/* Right Panel - Form */}
       <div className="flex w-full flex-col justify-center px-6 py-12 lg:w-1/2 lg:px-12">
         <div className="mx-auto w-full max-w-md">
-          <Link
-            to="/"
-            className="mb-8 inline-flex items-center gap-2 text-sm text-muted-foreground"
-          >
+          <Link to="/" className="mb-8 inline-flex items-center gap-2 text-sm text-muted-foreground">
             <ArrowLeft className="h-4 w-4" />
             Back to Home
           </Link>
@@ -110,76 +107,35 @@ const AdminAuth = () => {
               <Shield className="h-6 w-6 text-primary-foreground" />
             </div>
             <div>
-              <h1 className="font-heading text-2xl font-bold text-foreground">
-                Admin Login
-              </h1>
-              <p className="text-sm text-muted-foreground">
-                Access the admin dashboard
-              </p>
+              <h1 className="font-heading text-2xl font-bold text-foreground">Admin Login</h1>
+              <p className="text-sm text-muted-foreground">Access the admin dashboard</p>
             </div>
           </div>
 
           <form onSubmit={handleLogin} className="space-y-6">
             <div className="space-y-2">
               <Label htmlFor="identifier">Email or Mobile</Label>
-              <Input
-                id="identifier"
-                type="text"
-                placeholder="Enter admin email or mobile"
-                value={identifier}
-                onChange={(e) => setIdentifier(e.target.value)}
-                className="h-12"
-              />
-              {errors.identifier && (
-                <p className="text-sm text-destructive">{errors.identifier}</p>
-              )}
+              <Input id="identifier" type="text" placeholder="Enter admin email or mobile" value={identifier} onChange={(e) => setIdentifier(e.target.value)} className="h-12" />
+              {errors.identifier && <p className="text-sm text-destructive">{errors.identifier}</p>}
             </div>
-
             <div className="space-y-2">
               <Label htmlFor="password">Password</Label>
               <div className="relative">
-                <Input
-                  id="password"
-                  type={showPassword ? 'text' : 'password'}
-                  placeholder="Enter your password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="h-12 pr-12"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground"
-                >
+                <Input id="password" type={showPassword ? 'text' : 'password'} placeholder="Enter your password" value={password} onChange={(e) => setPassword(e.target.value)} className="h-12 pr-12" />
+                <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground">
                   {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                 </button>
               </div>
-              {errors.password && (
-                <p className="text-sm text-destructive">{errors.password}</p>
-              )}
+              {errors.password && <p className="text-sm text-destructive">{errors.password}</p>}
             </div>
-
-            <Button
-              type="submit"
-              className="h-12 w-full bg-gradient-primary text-primary-foreground"
-              disabled={isLoading}
-            >
-              {isLoading ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Signing in...
-                </>
-              ) : (
-                'Sign In as Admin'
-              )}
+            <Button type="submit" className="h-12 w-full bg-gradient-primary text-primary-foreground" disabled={isLoading}>
+              {isLoading ? (<><Loader2 className="mr-2 h-4 w-4 animate-spin" />Signing in...</>) : ('Sign In as Admin')}
             </Button>
           </form>
 
           <p className="mt-6 text-center text-sm text-muted-foreground">
             Staff member?{' '}
-            <Link to="/login" className="text-primary">
-              Login as Staff
-            </Link>
+            <Link to="/login" className="text-primary">Login as Staff</Link>
           </p>
         </div>
       </div>

@@ -284,8 +284,8 @@ serve(async (req) => {
       // Send Email
       if (user.notify_email && user.email) {
         const subject = type === "daily" 
-          ? `📋 MediTeck Daily Report - ${userAlerts.length} Alerts`
-          : `🚨 MediTeck Alert: ${userAlerts[0].message}`;
+          ? `📋 MediTech Daily Report - ${userAlerts.length} Alerts`
+          : `🚨 MediTech Alert: ${userAlerts[0].message}`;
         
         const htmlContent = generateEmailTemplate(userAlerts as AlertData[], type);
         const emailResult = await sendEmail(user.email, subject, htmlContent);

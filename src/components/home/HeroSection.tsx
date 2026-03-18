@@ -7,11 +7,11 @@ const HeroSection = () => {
       <div className="container">
         <div className="text-center max-w-3xl mx-auto">
           <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Medical Store Management System
+            Smart Pharmacy Solution
           </h1>
           <p className="text-lg text-muted-foreground mb-8">
             A complete solution for managing medicine inventory, billing, sales tracking, 
-            and expiry management for pharmacy stores.
+            and expiry alerts for pharmacy stores.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-3 justify-center mb-12">

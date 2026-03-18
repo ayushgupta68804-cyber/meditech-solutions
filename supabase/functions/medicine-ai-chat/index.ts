@@ -12,17 +12,14 @@ serve(async (req) => {
   }
 
   try {
-    // Validate authentication
     const authHeader = req.headers.get('Authorization');
     if (!authHeader?.startsWith('Bearer ')) {
-      console.log('Missing or invalid authorization header');
       return new Response(
         JSON.stringify({ error: 'Authentication required' }),
         { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
-    // Create Supabase client and verify the JWT token
     const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
     const supabaseAnonKey = Deno.env.get('SUPABASE_ANON_KEY')!;
     
@@ -30,12 +27,10 @@ serve(async (req) => {
       global: { headers: { Authorization: authHeader } }
     });
 
-    // Verify the token and get user claims
     const token = authHeader.replace('Bearer ', '');
     const { data: claimsData, error: claimsError } = await supabase.auth.getClaims(token);
 
     if (claimsError || !claimsData?.claims) {
-      console.log('Invalid authentication token:', claimsError?.message);
       return new Response(
         JSON.stringify({ error: 'Invalid authentication token' }),
         { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
@@ -43,9 +38,7 @@ serve(async (req) => {
     }
 
     const userId = claimsData.claims.sub;
-    console.log('Authenticated user:', userId);
 
-    // Parse and validate request body
     const { messages } = await req.json();
     
     if (!messages || !Array.isArray(messages) || messages.length === 0) {
@@ -55,7 +48,6 @@ serve(async (req) => {
       );
     }
 
-    // Validate message structure
     for (const msg of messages) {
       if (!msg.role || !msg.content || typeof msg.content !== 'string') {
         return new Response(
@@ -63,7 +55,6 @@ serve(async (req) => {
           { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
         );
       }
-      // Limit message content length
       if (msg.content.length > 5000) {
         return new Response(
           JSON.stringify({ error: 'Message content too long' }),
@@ -72,7 +63,6 @@ serve(async (req) => {
       }
     }
 
-    // Limit number of messages in conversation
     if (messages.length > 50) {
       return new Response(
         JSON.stringify({ error: 'Too many messages in conversation' }),
@@ -86,8 +76,6 @@ serve(async (req) => {
       throw new Error('LOVABLE_API_KEY is not configured');
     }
 
-    console.log('Sending request to AI gateway with messages:', messages.length, 'for user:', userId);
-
     const response = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -99,7 +87,7 @@ serve(async (req) => {
         messages: [
           {
             role: 'system',
-            content: `You are MediBot, an expert AI health assistant for MediTeck pharmacy. Your role is to provide helpful information about medicines AND recommend suitable exercises for health conditions.
+            content: `You are MediBot, an expert AI health assistant for MediTech pharmacy. Your role is to provide helpful information about medicines AND recommend suitable exercises for health conditions.
 
 When a user asks about a medicine, provide:
 1. **Generic Name & Brand Names** - What the medicine is called
@@ -116,16 +104,6 @@ When a user mentions a health issue or asks for exercises, provide:
 4. **Benefits** - How these exercises help with their condition
 5. **Precautions** - When to avoid or modify exercises
 6. **Yoga/Stretching** - Relevant yoga poses or stretches if applicable
-
-Common health conditions and exercise recommendations:
-- **Back Pain**: Cat-cow stretch, bird-dog, pelvic tilts, walking
-- **Diabetes**: Walking, cycling, swimming, strength training
-- **Hypertension/BP**: Brisk walking, cycling, swimming, yoga breathing
-- **Joint Pain/Arthritis**: Water aerobics, gentle stretching, tai chi
-- **Stress/Anxiety**: Deep breathing, yoga, walking, meditation
-- **Obesity/Weight Loss**: Cardio exercises, strength training, HIIT
-- **Heart Health**: Moderate cardio, walking, swimming
-- **Migraine**: Neck stretches, relaxation exercises, yoga
 
 Always include disclaimers:
 - For medicines: "This information is for educational purposes only. Always consult a doctor or pharmacist before taking any medication."
@@ -147,20 +125,17 @@ Respond in the same language the user uses (Hindi or English).`
       
       if (response.status === 429) {
         return new Response(JSON.stringify({ error: 'Rate limit exceeded. Please try again later.' }), {
-          status: 429,
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          status: 429, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         });
       }
       if (response.status === 402) {
         return new Response(JSON.stringify({ error: 'AI credits exhausted. Please add credits.' }), {
-          status: 402,
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          status: 402, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         });
       }
       
       return new Response(JSON.stringify({ error: 'AI gateway error' }), {
-        status: 500,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
 
@@ -170,8 +145,7 @@ Respond in the same language the user uses (Hindi or English).`
   } catch (error) {
     console.error('Medicine AI chat error:', error);
     return new Response(JSON.stringify({ error: 'An error occurred processing your request' }), {
-      status: 500,
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   }
 });

@@ -17,10 +17,10 @@ const CTASection = () => {
         <div className="grid gap-8 lg:grid-cols-2 items-center">
           <div className="text-center lg:text-left">
             <h2 className="text-2xl md:text-3xl font-bold mb-4">
-              Ready to Use MediTeck?
+              Ready to Use MediTech?
             </h2>
             <p className="mb-6 opacity-90">
-              Start managing your medical store efficiently with our complete solution.
+              Start managing your pharmacy efficiently with our complete solution.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
               <Button variant="secondary" size="lg" asChild>
