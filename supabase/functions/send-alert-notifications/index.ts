@@ -169,10 +169,10 @@ function generateSMSMessage(alerts: AlertData[], type: "instant" | "daily"): str
   if (type === "daily") {
     const lowStockCount = alerts.filter(a => a.type === "low_stock").length;
     const expiryCount = alerts.filter(a => a.type === "expiry").length;
-    return `MediTeck Daily Alert: ${lowStockCount} low stock, ${expiryCount} expiring medicines. Check dashboard for details.`;
+    return `MediTech Daily Alert: ${lowStockCount} low stock, ${expiryCount} expiring medicines. Check dashboard for details.`;
   } else {
     const alert = alerts[0];
-    return `MediTeck Alert: ${alert.message}`;
+    return `MediTech Alert: ${alert.message}`;
   }
 }
 
