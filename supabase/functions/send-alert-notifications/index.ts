@@ -155,8 +155,8 @@ function generateEmailTemplate(alerts: AlertData[], type: "instant" | "daily"): 
           </p>
         </div>
         <div class="footer">
-          <p>This is an automated alert from MediTeck Pharmacy System.</p>
-          <p>© 2024-25 MediTeck - Mumbai University Project</p>
+          <p>This is an automated alert from MediTech Pharmacy.</p>
+          <p>© 2024-25 MediTech - Mumbai University Project</p>
         </div>
       </div>
     </body>
