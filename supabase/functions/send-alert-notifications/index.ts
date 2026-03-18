@@ -131,7 +131,7 @@ function generateEmailTemplate(alerts: AlertData[], type: "instant" | "daily"): 
       <div class="container">
         <div class="header">
           <h1 style="margin: 0;">${title}</h1>
-          <p style="margin: 8px 0 0 0;">MediTeck Pharmacy Management System</p>
+          <p style="margin: 8px 0 0 0;">MediTech Smart Pharmacy Solution</p>
         </div>
         <div class="content">
           <p>You have <strong>${alerts.length}</strong> alert(s) that require your attention:</p>
