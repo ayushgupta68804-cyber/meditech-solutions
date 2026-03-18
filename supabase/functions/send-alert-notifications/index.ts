@@ -45,7 +45,7 @@ interface UserProfile {
 async function sendEmail(to: string, subject: string, htmlContent: string): Promise<{ success: boolean; error?: string }> {
   try {
     const response = await resend.emails.send({
-      from: "MediTeck Alerts <onboarding@resend.dev>",
+      from: "MediTech Alerts <onboarding@resend.dev>",
       to: [to],
       subject: subject,
       html: htmlContent,
