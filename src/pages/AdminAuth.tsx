@@ -27,6 +27,18 @@ const AdminAuth = () => {
   useEffect(() => {
     if (!loading && user) {
       if (isAdmin) {
+        const lastAdminId = localStorage.getItem('last_admin_id');
+        const isReturningAdmin = lastAdminId === user.id;
+        
+        localStorage.setItem('last_admin_id', user.id);
+        
+        toast({
+          title: isReturningAdmin ? '👋 Welcome back, Admin!' : '🔐 Admin Logged In',
+          description: isReturningAdmin 
+            ? 'Good to see you again!' 
+            : 'You have been granted admin access.',
+        });
+        
         navigate('/admin', { replace: true });
       } else {
         toast({
