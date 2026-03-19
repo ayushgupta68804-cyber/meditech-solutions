@@ -37,6 +37,7 @@ const AdminAuth = () => {
           description: isReturningAdmin 
             ? 'Good to see you again!' 
             : 'You have been granted admin access.',
+          duration: 3000,
         });
         
         navigate('/admin', { replace: true });
