@@ -62,7 +62,7 @@ const MedicinesPage = () => {
     setDialogOpen(true);
   };
 
-  const openEditDialog = (medicine: any) => {
+  const openEditDialog = (medicine: Medicine) => {
     setEditingMedicine(medicine);
     setFormData({
       name: medicine.name,
