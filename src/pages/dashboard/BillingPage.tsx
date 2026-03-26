@@ -35,7 +35,7 @@ const BillingPage = () => {
   const [showScanner, setShowScanner] = useState(false);
   const barcodeInputRef = useRef<HTMLInputElement>(null);
 
-  const addToCart = (medicine: any) => {
+  const addToCart = (medicine: Medicine) => {
     const existing = cart.find((item) => item.medicine_id === medicine.id);
     if (existing) {
       if (existing.quantity >= medicine.quantity) {
