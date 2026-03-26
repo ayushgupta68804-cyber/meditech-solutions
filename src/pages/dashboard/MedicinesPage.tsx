@@ -21,7 +21,7 @@ const MedicinesPage = () => {
 
   const [search, setSearch] = useState('');
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [editingMedicine, setEditingMedicine] = useState<any>(null);
+  const [editingMedicine, setEditingMedicine] = useState<Medicine | null>(null);
   const [formData, setFormData] = useState({
     name: '',
     batch_no: '',
