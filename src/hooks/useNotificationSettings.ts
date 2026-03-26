@@ -46,7 +46,7 @@ export function useNotificationSettings() {
       queryClient.invalidateQueries({ queryKey: ["notification-settings"] });
       toast.success("Notification settings updated!");
     },
-    onError: (error: any) => {
+    onError: (error: Error) => {
       toast.error(`Failed to update settings: ${error.message}`);
     },
   });
