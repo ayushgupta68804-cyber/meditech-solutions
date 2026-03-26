@@ -91,8 +91,8 @@ const MedicinesPage = () => {
       }
       setDialogOpen(false);
       resetForm();
-    } catch (error: any) {
-      toast({ title: 'Error', description: error.message, variant: 'destructive' });
+    } catch (error: unknown) {
+      toast({ title: 'Error', description: error instanceof Error ? error.message : 'Unknown error', variant: 'destructive' });
     }
   };
 
@@ -101,8 +101,8 @@ const MedicinesPage = () => {
     try {
       await deleteMedicine.mutateAsync(id);
       toast({ title: 'Medicine deleted successfully' });
-    } catch (error: any) {
-      toast({ title: 'Error', description: error.message, variant: 'destructive' });
+    } catch (error: unknown) {
+      toast({ title: 'Error', description: error instanceof Error ? error.message : 'Unknown error', variant: 'destructive' });
     }
   };
 
