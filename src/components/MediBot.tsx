@@ -131,7 +131,7 @@ const MediBot = () => {
           }
         }
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('MediBot error:', error);
       toast({
         title: 'Error',
