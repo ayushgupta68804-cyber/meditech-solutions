@@ -83,7 +83,7 @@ export function useNotificationSettings() {
     onSuccess: () => {
       toast.success("Test notification sent!");
     },
-    onError: (error: any) => {
+    onError: (error: Error) => {
       toast.error(`Failed to send test: ${error.message}`);
     },
   });
