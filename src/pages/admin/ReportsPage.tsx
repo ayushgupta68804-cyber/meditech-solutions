@@ -17,7 +17,7 @@ const ReportsPage = () => {
   const { data: expiring } = useExpiringMedicines(30);
   const { data: sales } = useSales();
 
-  const downloadCSV = (data: any[], filename: string) => {
+  const downloadCSV = (data: Record<string, unknown>[], filename: string) => {
     if (!data?.length) return;
     const headers = Object.keys(data[0]).join(',');
     const rows = data.map((row) =>

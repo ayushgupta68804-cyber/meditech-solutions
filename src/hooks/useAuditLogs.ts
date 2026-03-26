@@ -26,7 +26,7 @@ export const useAuditLogs = (limit: number = 50) => {
       // Fetch user info for each log
       const userIds = [...new Set(logs?.map(l => l.user_id).filter(Boolean) as string[])];
       
-      let profiles: Record<string, { name: string; email: string }> = {};
+      const profiles: Record<string, { name: string; email: string }> = {};
       
       if (userIds.length > 0) {
         const { data: profilesData } = await supabase

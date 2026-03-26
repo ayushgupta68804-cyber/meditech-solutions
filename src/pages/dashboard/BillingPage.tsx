@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import DashboardLayout from '@/components/dashboard/DashboardLayout';
-import { useMedicines } from '@/hooks/useMedicines';
+import { useMedicines, type Medicine } from '@/hooks/useMedicines';
 import { useCreateSale } from '@/hooks/useSales';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';

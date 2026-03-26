@@ -135,7 +135,7 @@ const MediBot = () => {
       console.error('MediBot error:', error);
       toast({
         title: 'Error',
-        description: error.message || 'Failed to get AI response',
+        description: error instanceof Error ? error.message : 'Failed to get AI response',
         variant: 'destructive',
       });
       // Remove the user message if there was an error

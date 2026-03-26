@@ -43,6 +43,7 @@ const BarcodeScanner = ({ onScan, onClose }: BarcodeScannerProps) => {
       });
       setIsScanning(false);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [onScan, onClose, toast]);
 
   const stopScanning = useCallback(() => {

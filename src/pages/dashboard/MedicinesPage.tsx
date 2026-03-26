@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import DashboardLayout from '@/components/dashboard/DashboardLayout';
-import { useMedicines, useAddMedicine, useUpdateMedicine, useDeleteMedicine } from '@/hooks/useMedicines';
+import { useMedicines, useAddMedicine, useUpdateMedicine, useDeleteMedicine, type Medicine } from '@/hooks/useMedicines';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
