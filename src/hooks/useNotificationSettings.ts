@@ -46,7 +46,7 @@ export function useNotificationSettings() {
       queryClient.invalidateQueries({ queryKey: ["notification-settings"] });
       toast.success("Notification settings updated!");
     },
-    onError: (error: any) => {
+    onError: (error: Error) => {
       toast.error(`Failed to update settings: ${error.message}`);
     },
   });
@@ -66,7 +66,7 @@ export function useNotificationSettings() {
       queryClient.invalidateQueries({ queryKey: ["notification-settings"] });
       toast.success("Mobile number updated!");
     },
-    onError: (error: any) => {
+    onError: (error: Error) => {
       toast.error(`Failed to update mobile: ${error.message}`);
     },
   });
@@ -83,7 +83,7 @@ export function useNotificationSettings() {
     onSuccess: () => {
       toast.success("Test notification sent!");
     },
-    onError: (error: any) => {
+    onError: (error: Error) => {
       toast.error(`Failed to send test: ${error.message}`);
     },
   });

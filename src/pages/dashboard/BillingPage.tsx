@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import DashboardLayout from '@/components/dashboard/DashboardLayout';
-import { useMedicines } from '@/hooks/useMedicines';
+import { useMedicines, type Medicine } from '@/hooks/useMedicines';
 import { useCreateSale } from '@/hooks/useSales';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -35,7 +35,7 @@ const BillingPage = () => {
   const [showScanner, setShowScanner] = useState(false);
   const barcodeInputRef = useRef<HTMLInputElement>(null);
 
-  const addToCart = (medicine: any) => {
+  const addToCart = (medicine: Medicine) => {
     const existing = cart.find((item) => item.medicine_id === medicine.id);
     if (existing) {
       if (existing.quantity >= medicine.quantity) {
@@ -118,8 +118,8 @@ const BillingPage = () => {
       setCart([]);
       setCustomerName('');
       setCustomerContact('');
-    } catch (error: any) {
-      toast({ title: 'Error', description: error.message, variant: 'destructive' });
+    } catch (error: unknown) {
+      toast({ title: 'Error', description: error instanceof Error ? error.message : 'Unknown error', variant: 'destructive' });
     }
   };
 

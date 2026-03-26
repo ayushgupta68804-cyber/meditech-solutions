@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import DashboardLayout from '@/components/dashboard/DashboardLayout';
-import { useMedicines, useAddMedicine, useUpdateMedicine, useDeleteMedicine } from '@/hooks/useMedicines';
+import { useMedicines, useAddMedicine, useUpdateMedicine, useDeleteMedicine, type Medicine } from '@/hooks/useMedicines';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -21,7 +21,7 @@ const MedicinesPage = () => {
 
   const [search, setSearch] = useState('');
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [editingMedicine, setEditingMedicine] = useState<any>(null);
+  const [editingMedicine, setEditingMedicine] = useState<Medicine | null>(null);
   const [formData, setFormData] = useState({
     name: '',
     batch_no: '',
@@ -62,7 +62,7 @@ const MedicinesPage = () => {
     setDialogOpen(true);
   };
 
-  const openEditDialog = (medicine: any) => {
+  const openEditDialog = (medicine: Medicine) => {
     setEditingMedicine(medicine);
     setFormData({
       name: medicine.name,
@@ -91,8 +91,8 @@ const MedicinesPage = () => {
       }
       setDialogOpen(false);
       resetForm();
-    } catch (error: any) {
-      toast({ title: 'Error', description: error.message, variant: 'destructive' });
+    } catch (error: unknown) {
+      toast({ title: 'Error', description: error instanceof Error ? error.message : 'Unknown error', variant: 'destructive' });
     }
   };
 
@@ -101,8 +101,8 @@ const MedicinesPage = () => {
     try {
       await deleteMedicine.mutateAsync(id);
       toast({ title: 'Medicine deleted successfully' });
-    } catch (error: any) {
-      toast({ title: 'Error', description: error.message, variant: 'destructive' });
+    } catch (error: unknown) {
+      toast({ title: 'Error', description: error instanceof Error ? error.message : 'Unknown error', variant: 'destructive' });
     }
   };
 

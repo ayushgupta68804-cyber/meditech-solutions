@@ -70,8 +70,8 @@ export const useSales = (startDate?: string, endDate?: string) => {
       const userIds = [...new Set(salesData?.map(s => s.user_id).filter(Boolean) as string[])];
       const medicineIds = [...new Set(salesData?.flatMap(s => s.sale_items?.map((i: { medicine_id: string }) => i.medicine_id) || []).filter(Boolean) as string[])];
 
-      let profiles: Record<string, string> = {};
-      let medicines: Record<string, string> = {};
+      const profiles: Record<string, string> = {};
+      const medicines: Record<string, string> = {};
 
       if (userIds.length > 0) {
         const { data: profilesData } = await supabase
